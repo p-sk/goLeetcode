@@ -31,8 +31,7 @@ func searchInsert(nums []int, target int) int {
 }
 
 func main() {
-	res := searchInsert([]int{1, 3, 5, 6}, 5)
-
+	res := searchInsert([]int{1, 3, 5, 6}, 7)
 	fmt.Println(res)
 
 }
