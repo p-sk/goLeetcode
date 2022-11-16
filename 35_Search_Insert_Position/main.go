@@ -6,32 +6,33 @@ func searchInsert(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
 	var mid int
-	if target < nums[start] {
-		return start
-	}
-	if target > nums[end] {
-		return end
-	}
+	locationIndex := -1
 
-	for start+1 < end {
+	for start <= end {
 		sumposition := start + end
 		if sumposition%2 == 0 {
 			mid = sumposition / 2
 		} else {
 			mid = (sumposition + 1) / 2
 		}
-		if nums[mid] >= target && target >= nums[start] {
-			end = mid
-		} else if nums[mid] <= target && target <= nums[end] {
-			start = mid
+		if nums[mid] > target {
+			end = mid - 1
+		} else if nums[mid] < target {
+			start = mid + 1
+		} else {
+			locationIndex = mid
+			break
 		}
 	}
-	return start
+	if locationIndex < 0 {
+		locationIndex = start
+	}
+	return locationIndex
 
 }
 
 func main() {
-	res := searchInsert([]int{1, 3, 5, 6}, 7)
+	res := searchInsert([]int{1, 3, 5, 6}, 5)
 	fmt.Println(res)
 
 }
